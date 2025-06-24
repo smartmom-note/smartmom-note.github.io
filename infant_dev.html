@@ -210,6 +210,35 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Gemini API Integration Section: AI Expert Advice -->
+            <section class="bg-gray-100 p-6 rounded-lg shadow-md border-l-4 border-gray-400">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="inline-block mr-3 text-gray-600">
+                        <svg class="lucide lucide-sparkles" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.916 2.016l.162.593c.307 1.13.905 2.158 1.698 3.018l.583.63c.404.436.598 1.01.528 1.6c-.183 1.545.244 3.106 1.258 4.387l.487.618c.61.777.828 1.761.642 2.684-.249 1.272-1.077 2.37-2.184 3.036l-.6.376c-.724.453-1.603.65-2.5.556-1.745-.18-3.414-.85-4.81-1.92l-.583-.44c-.663-.5-1.22-1.127-1.635-1.841-.532-.916-.763-2.025-.658-3.14l.09-.94c.144-1.5-.233-2.998-1.09-4.228l-.487-.704c-.61-.884-.813-1.99-.607-3.048.266-1.35.987-2.52 2.025-3.328l.583-.45c.704-.54 1.52-.807 2.366-.757z"/></svg>
+                    </span>
+                    AI 전문가에게 물어보기 ✨
+                </h2>
+                <div class="mb-4">
+                    <label for="symptomsInput" class="block text-gray-700 text-sm font-bold mb-2">자녀의 발달 관련 증상이나 궁금한 점을 적어주세요:</label>
+                    <textarea id="symptomsInput" rows="5" class="shadow appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" placeholder="예: 15개월인데 아직 혼자 걷지 못하고, 다른 아이들과 눈 맞춤이 적어요."></textarea>
+                </div>
+                <button id="getAdviceBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    ✨ 조언 받기
+                </button>
+                <div id="loadingIndicator" class="mt-4 text-center text-blue-600 hidden">
+                    <svg class="animate-spin h-5 w-5 mr-3 inline-block" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    AI가 분석 중입니다...
+                </div>
+                <div id="adviceOutput" class="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg text-gray-800 hidden">
+                    <h3 class="text-lg font-semibold mb-2">AI 전문가의 조언:</h3>
+                    <p id="adviceText"></p>
+                    <p class="text-sm text-red-500 mt-4">⚠️ 본 조언은 AI에 의해 생성된 참고 자료이며, 전문 의료 진단이나 상담을 대체할 수 없습니다. 정확한 진단과 치료를 위해서는 반드시 소아청소년과 전문의와 상담하시기 바랍니다.</p>
+                </div>
+            </section>
         </div>
 
         <footer class="bg-gray-800 p-6 text-white text-center text-sm rounded-b-xl">
@@ -243,6 +272,63 @@
             `;
             document.body.appendChild(messageBox);
         }
+
+        document.getElementById('getAdviceBtn').addEventListener('click', async () => {
+            const symptomsInput = document.getElementById('symptomsInput').value;
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const adviceOutput = document.getElementById('adviceOutput');
+            const adviceText = document.getElementById('adviceText');
+
+            if (!symptomsInput.trim()) {
+                showMessageBox('자녀의 발달 관련 증상이나 궁금한 점을 입력해주세요.');
+                adviceOutput.classList.add('hidden'); // Ensure output is hidden if input is empty
+                return;
+            }
+
+            loadingIndicator.classList.remove('hidden');
+            adviceOutput.classList.add('hidden');
+            adviceText.textContent = '';
+
+            try {
+                let chatHistory = [];
+                const prompt = `영유아 발달 전문가로서 다음 자녀의 발달 관련 증상에 대해 부모에게 구체적이고 도움이 되는 조언을 제공해주세요. 의학적 진단이 아닌 일반적인 조언과 권장 사항을 중심으로 작성하며, 항상 전문가와 상담이 필요함을 강조해주세요.
+                
+                아이의 증상: ${symptomsInput}
+                
+                다음과 같은 형식으로 답변해주세요:
+                핵심 조언: [핵심 조언 내용]
+                권장 사항: [구체적인 권장 사항 리스트]
+                추가 검토 사항: [추가적으로 고려할 점이나 주의사항]
+                `;
+                
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    adviceText.innerHTML = text.replace(/\n/g, '<br>'); // Display newlines as breaks
+                } else {
+                    adviceText.textContent = 'AI 조언을 가져오는 데 실패했습니다. 다시 시도해 주세요.';
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                adviceText.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                adviceOutput.classList.remove('hidden');
+            }
+        });
     </script>
 </body>
 </html>
