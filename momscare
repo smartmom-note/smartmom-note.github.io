@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>엄마 감정 기록장</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate-50 */
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Custom styling for textareas, if needed */
+        textarea {
+            resize: vertical; /* Allow vertical resizing */
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 flex items-center justify-center min-h-screen">
+    <div class="max-w-4xl w-full bg-white rounded-3xl shadow-xl p-6 md:p-10 border border-gray-200">
+        <!-- Title Section -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-teal-700 mb-4">
+                ✨ 엄마 감정 기록장 ✨
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-4">
+                엄마들의 마음을 다독이는 특별한 기록 루틴
+            </p>
+            <!-- Smart Mom Logo Placeholder (removed from here) -->
+        </div>
+
+        <!-- Emotion Recording Section -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-semibold text-teal-600 mb-6 text-center">
+                📝 오늘 나의 감정 기록하기
+            </h2>
+            <div class="space-y-8">
+                <!-- 1. 오늘의 감정 체크 -->
+                <div class="bg-yellow-50 p-6 rounded-2xl shadow-md border border-yellow-200">
+                    <h3 class="text-2xl font-semibold text-yellow-800 mb-4 flex items-center">
+                        <span class="text-4xl mr-3">🗓️</span> 1. 오늘 가장 자주 느낀 감정은?
+                    </h3>
+                    <div class="text-gray-700 space-y-2">
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 text-base">
+                            <label class="flex items-center">
+                                <input type="radio" name="emotion" value="짜증" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 짜증
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="emotion" value="피곤" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 피곤
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="emotion" value="불안" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 불안
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="emotion" value="외로움" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 외로움
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="emotion" value="기쁨" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 기쁨
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="emotion" value="혼란" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 혼란
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="emotion" value="기타" id="emotion-etc-radio" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 기타
+                                <input type="text" id="emotion-etc-input" placeholder="직접 입력" class="border-b border-gray-400 w-28 focus:outline-none focus:border-yellow-600 bg-transparent text-sm p-1 rounded-md" disabled>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 감정이 올라온 순간 메모 -->
+                <div class="bg-red-50 p-6 rounded-2xl shadow-md border border-red-200">
+                    <h3 class="text-2xl font-semibold text-red-800 mb-4 flex items-center">
+                        <span class="text-4xl mr-3">📝</span> 2. 어떤 상황에서 감정을 느꼈나요?
+                    </h3>
+                    <p class="text-gray-700 mb-3 text-sm">
+                        예: 아이가 밥을 안 먹을 때, 말을 안 들을 때, 예상치 못한 일이 생겼을 때 등
+                    </p>
+                    <textarea id="situation-memo" class="w-full h-28 p-3 border border-red-300 rounded-lg focus:outline-none focus:border-red-500 text-gray-800 bg-red-100/50" placeholder="자유롭게 작성해주세요."></textarea>
+                </div>
+
+                <!-- 3. 내 감정에 한 줄 말 걸기 -->
+                <div class="bg-blue-50 p-6 rounded-2xl shadow-md border border-blue-200">
+                    <h3 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
+                        <span class="text-4xl mr-3">💬</span> 3. 내 감정에 한 줄 말 걸기
+                    </h3>
+                    <p class="text-gray-700 mb-3 text-sm">
+                        예: "지금 네가 힘들다는 걸 알아.", "괜찮아, 오늘은 이 정도면 잘했어."
+                    </p>
+                    <textarea id="self-talk-memo" class="w-full h-28 p-3 border border-blue-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-800 bg-blue-100/50" placeholder="나 자신에게 어떤 위로의 말을 건네고 싶나요?"></textarea>
+                </div>
+
+                <!-- Smart Mom Button -->
+                <div class="text-center">
+                    <button id="get-ai-response-btn" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-teal-300">
+                        스마트맘에게 이야기하고 위로받기
+                    </button>
+                </div>
+
+                <!-- Smart Mom Response Area -->
+                <div id="ai-response-container" class="bg-gray-100 p-6 rounded-2xl shadow-inner border border-gray-300 hidden">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center justify-center">
+                        <span class="text-4xl mr-3">🫂</span> 스마트맘의 위로 메시지
+                    </h3>
+                    <div id="loading-indicator" class="flex justify-center items-center py-4 hidden">
+                        <div class="loading-spinner"></div>
+                        <p class="ml-3 text-gray-600">메시지를 생성 중입니다...</p>
+                    </div>
+                    <p id="ai-response-text" class="text-gray-700 leading-relaxed text-lg whitespace-pre-wrap"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smart Mom Logo at the very bottom -->
+        <div class="mt-12 pt-8 border-t border-gray-200 text-center">
+            <img src="https://placehold.co/150x45/ffffff/000000?text=@smartmom.note"
+                 alt="@smartmom.note Logo"
+                 class="mx-auto rounded-md shadow-sm opacity-50"
+                 onerror="this.onerror=null; this.src='https://placehold.co/150x45/ffffff/000000?text=@smartmom.note';"
+                 aria-label="@smartmom.note 로고">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const emotionRadios = document.querySelectorAll('input[name="emotion"]');
+            const emotionEtcRadio = document.getElementById('emotion-etc-radio');
+            const emotionEtcInput = document.getElementById('emotion-etc-input');
+            const situationMemo = document.getElementById('situation-memo');
+            const selfTalkMemo = document.getElementById('self-talk-memo');
+            const getAiResponseBtn = document.getElementById('get-ai-response-btn');
+            const aiResponseContainer = document.getElementById('ai-response-container');
+            const aiResponseText = document.getElementById('ai-response-text');
+            const loadingIndicator = document.getElementById('loading-indicator');
+
+            // Enable/disable '기타' input based on radio selection
+            emotionRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    if (emotionEtcRadio.checked) {
+                        emotionEtcInput.disabled = false;
+                        emotionEtcInput.focus();
+                    } else {
+                        emotionEtcInput.disabled = true;
+                        emotionEtcInput.value = ''; // Clear if not selected
+                    }
+                });
+            });
+
+            getAiResponseBtn.addEventListener('click', async () => {
+                let selectedEmotion = '';
+                emotionRadios.forEach(radio => {
+                    if (radio.checked) {
+                        selectedEmotion = radio.value;
+                    }
+                });
+
+                if (selectedEmotion === '기타') {
+                    selectedEmotion = emotionEtcInput.value.trim();
+                }
+
+                const situation = situationMemo.value.trim();
+                const selfTalk = selfTalkMemo.value.trim();
+
+                if (!selectedEmotion || !situation || !selfTalk) {
+                    aiResponseContainer.classList.remove('hidden');
+                    loadingIndicator.classList.add('hidden');
+                    aiResponseText.textContent = "감정, 상황, 그리고 내 감정에 대한 한 줄 말하기를 모두 입력해주세요.";
+                    return;
+                }
+
+                aiResponseContainer.classList.remove('hidden');
+                loadingIndicator.classList.remove('hidden');
+                aiResponseText.textContent = ''; // Clear previous response
+
+                // Constructing the prompt for the Smart Mom (LLM)
+                const prompt = `
+                    사용자님의 감정을 기록하고 있습니다.
+                    오늘 가장 자주 느끼신 감정은 '${selectedEmotion}' 입니다.
+                    이 감정이 올라온 상황은 다음과 같습니다: '${situation}'.
+                    사용자님께서 자신의 감정에게 해주고 싶으신 말은: '${selfTalk}' 입니다.
+
+                    이 정보를 바탕으로 사용자님께 최소 4줄 이상으로 진심으로 공감하고 위로를 건네는 메시지를 한국어로 작성해주세요.
+                    따뜻하고 부드러우면서도 너무 딱딱하지 않은 말투로, 마치 가까운 언니나 친구가 이야기하듯이 친근하게 대해주세요.
+                    사용자님께서 겪은 상황과 감정에 대해 깊이 공감하며, '저도 그런 때가 있었답니다', '정말 힘드셨겠어요' 와 같은 표현을 자유롭게 사용해주세요.
+                    **사용자께서 언급하지 않은 구체적인 상황은 언급하지 마세요.**
+                    '어머니'라는 호칭은 꼭 필요한 순간에만 사용하고, 평소에는 사용하지 마세요.
+                    스마트맘인 제가 저를 지칭하는 표현은 사용하지 마세요.
+                `;
+
+                try {
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = "AIzaSyBSXCBlMJbS-qJPJ3KE6mVqN_64SVSx6y8"; // API 키 삽입
+
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        aiResponseText.textContent = text;
+                    } else {
+                        aiResponseText.textContent = "스마트맘 메시지를 생성하는 데 문제가 발생했습니다. 다시 시도해주세요.";
+                    }
+                } catch (error) {
+                    console.error("Error generating Smart Mom response:", error);
+                    aiResponseText.textContent = "스마트맘 메시지를 생성하는 중 오류가 발생했습니다. 네트워크 연결을 확인하거나 다시 시도해주세요.";
+                } finally {
+                    loadingIndicator.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
