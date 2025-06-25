@@ -59,7 +59,7 @@
                                 <input type="radio" name="emotion" value="짜증" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 짜증
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="emotion" value="피곤" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 피곤
+                                <input type="radio" name="emotion" value="화" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 화
                             </label>
                             <label class="flex items-center">
                                 <input type="radio" name="emotion" value="불안" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 불안
@@ -68,10 +68,13 @@
                                 <input type="radio" name="emotion" value="외로움" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 외로움
                             </label>
                             <label class="flex items-center">
+                                <input type="radio" name="emotion" value="만족" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 만족
+                            </label>
+                            <label class="flex items-center">
                                 <input type="radio" name="emotion" value="기쁨" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 기쁨
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="emotion" value="혼란" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 혼란
+                                <input type="radio" name="emotion" value="죄책감" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 죄책감
                             </label>
                             <label class="flex items-center">
                                 <input type="radio" name="emotion" value="기타" id="emotion-etc-radio" class="mr-2 rounded-full text-yellow-600 focus:ring-yellow-500"> 기타
@@ -80,6 +83,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 1-2. 감정 만족도 추가 (Removed as per user request) -->
 
                 <!-- 2. 감정이 올라온 순간 메모 -->
                 <div class="bg-red-50 p-6 rounded-2xl shadow-md border border-red-200">
@@ -139,6 +144,7 @@
             const emotionRadios = document.querySelectorAll('input[name="emotion"]');
             const emotionEtcRadio = document.getElementById('emotion-etc-radio');
             const emotionEtcInput = document.getElementById('emotion-etc-input');
+            // const satisfactionRadios = document.querySelectorAll('input[name="satisfaction"]'); // Removed
             const situationMemo = document.getElementById('situation-memo');
             const selfTalkMemo = document.getElementById('self-talk-memo');
             const getAiResponseBtn = document.getElementById('get-ai-response-btn');
@@ -171,9 +177,19 @@
                     selectedEmotion = emotionEtcInput.value.trim();
                 }
 
+                // Removed satisfaction logic
+                // let selectedSatisfaction = '';
+                // satisfactionRadios.forEach(radio => {
+                //     if (radio.checked) {
+                //         selectedSatisfaction = radio.value;
+                //     }
+                // });
+
+
                 const situation = situationMemo.value.trim();
                 const selfTalk = selfTalkMemo.value.trim();
 
+                // Removed satisfaction from validation
                 if (!selectedEmotion || !situation || !selfTalk) {
                     aiResponseContainer.classList.remove('hidden');
                     loadingIndicator.classList.add('hidden');
@@ -193,11 +209,12 @@
                     사용자님께서 자신의 감정에게 해주고 싶으신 말은: '${selfTalk}' 입니다.
 
                     이 정보를 바탕으로 사용자님께 최소 4줄 이상으로 진심으로 공감하고 위로를 건네는 메시지를 한국어로 작성해주세요.
+                    반드시 존대어를 사용하며, 반말은 절대 사용하지 마세요.
                     따뜻하고 부드러우면서도 너무 딱딱하지 않은 말투로, 마치 가까운 언니나 친구가 이야기하듯이 친근하게 대해주세요.
                     사용자님께서 겪은 상황과 감정에 대해 깊이 공감하며, '저도 그런 때가 있었답니다', '정말 힘드셨겠어요' 와 같은 표현을 자유롭게 사용해주세요.
-                    **사용자께서 언급하지 않은 구체적인 상황은 언급하지 마세요.**
+                    사용자께서 언급하지 않은 구체적인 상황은 언급하지 마세요.
                     '어머니'라는 호칭은 꼭 필요한 순간에만 사용하고, 평소에는 사용하지 마세요.
-                    스마트맘인 제가 저를 지칭하는 표현은 사용하지 마세요.
+                    저를 지칭하는 표현은 사용하지 마세요.
                 `;
 
                 try {
@@ -229,7 +246,7 @@
                 } finally {
                     loadingIndicator.classList.add('hidden');
                 }
-            }); 
+            });
         });
     </script>
 </body>
