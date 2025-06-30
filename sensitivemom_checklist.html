@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>예민한 엄마 셀프 체크리스트</title>
+    <title>나는 예민한 엄마일까? 자가 체크리스트</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,13 +20,28 @@
             border-radius: 1.5rem; /* More rounded corners */
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Softer shadow */
         }
+        .main-title-wrapper {
+            background-color: #e0e7ff; /* Light blue background for title */
+            padding: 1.5rem 1rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .main-title {
+            font-size: 2.5rem; /* Larger title */
+            font-weight: 700;
+            color: #4f46e5; /* Deeper indigo */
+            line-height: 1.2;
+        }
         .section-title {
             font-size: 1.75rem; /* Larger title */
             font-weight: 700;
-            color: #2c3e50; /* Darker blue-gray */
+            color: #374151; /* Darker gray */
             margin-bottom: 1.5rem;
-            border-bottom: 2px solid #e0e7ff; /* Light blue border */
-            padding-bottom: 0.75rem;
+            background-color: #f3f4f6; /* Light gray background for section titles */
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.75rem;
+            border-left: 5px solid #6366f1; /* Indigo left border */
         }
         .checklist-item {
             display: flex;
@@ -38,14 +53,14 @@
             border: 1px solid #e2e8f0; /* Subtle border */
         }
         .item-text {
-            flex: 2;
+            flex: 3; /* Adjusted flex to take more space */
             font-size: 1.1rem;
             color: #334155; /* Medium dark text */
             line-height: 1.6;
             padding-right: 1rem;
         }
         .item-options {
-            flex: 1.5;
+            flex: 1; /* Adjusted flex to take less space */
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -64,23 +79,7 @@
             accent-color: #6366f1; /* Purple accent for radio buttons */
             transform: scale(1.2); /* Slightly larger radio buttons */
         }
-        .notes-area {
-            flex: 1.5;
-            margin-left: 1rem;
-            padding-left: 1rem;
-            border-left: 1px dashed #cbd5e1; /* Dashed separator */
-        }
-        .notes-area textarea {
-            width: 100%;
-            min-height: 50px;
-            padding: 0.75rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 0.5rem;
-            font-size: 0.95rem;
-            color: #334155;
-            resize: vertical; /* Allow vertical resizing */
-            background-color: #ffffff;
-        }
+        /* Removed .notes-area styles as the element is removed */
         .submit-button {
             display: block;
             width: fit-content;
@@ -103,6 +102,76 @@
         .submit-button:active {
             transform: translateY(0);
         }
+        .footer-note {
+            text-align: center;
+            color: #6b7280; /* Gray text */
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb; /* Light border above footer */
+        }
+
+        /* Result Modal Specific Styles */
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); /* Gradient background */
+            padding: 2.5rem; /* More padding */
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            animation: fadeInScale 0.3s ease-out forwards; /* Animation for modal */
+        }
+        .modal-header {
+            font-size: 2.2rem; /* Larger header */
+            font-weight: 700;
+            color: #4f46e5; /* Indigo color */
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #c7d2fe; /* Light indigo border */
+            padding-bottom: 0.75rem;
+        }
+        .modal-body {
+            color: #334155; /* Darker text */
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        .modal-close-button {
+            background-color: #6366f1; /* Purple button */
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 0.75rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+        }
+        .modal-close-button:hover {
+            background-color: #4f46e5;
+            transform: translateY(-1px);
+        }
+        .absolute-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            color: #94a3b8; /* Lighter gray for close icon */
+            font-size: 2.5rem; /* Larger close icon */
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .absolute-close-button:hover {
+            color: #64748b;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
@@ -110,21 +179,42 @@
                 margin: 1rem;
                 padding: 1.5rem;
             }
+            .main-title {
+                font-size: 2rem; /* Adjust for smaller screens */
+            }
+            .section-title {
+                font-size: 1.5rem;
+                padding: 0.6rem 1rem;
+            }
             .checklist-item {
                 flex-direction: column;
                 align-items: stretch;
             }
-            .item-options, .notes-area {
+            .item-options {
                 border-left: none;
                 border-top: 1px dashed #cbd5e1;
                 margin-left: 0;
                 padding-left: 0;
                 padding-top: 1rem;
                 margin-top: 1rem;
-            }
-            .item-options {
                 justify-content: flex-start;
                 gap: 1rem;
+            }
+            /* Removed .notes-area responsive styles */
+            .modal-content {
+                padding: 1.5rem;
+                border-radius: 1rem;
+            }
+            .modal-header {
+                font-size: 1.8rem;
+            }
+            .modal-body {
+                font-size: 1rem;
+            }
+            .absolute-close-button {
+                font-size: 2rem;
+                top: 0.75rem;
+                right: 0.8rem;
             }
         }
 
@@ -150,7 +240,7 @@
                 margin-bottom: 0.75rem; /* Slightly less margin for print */
                 padding: 0.75rem;
             }
-            .item-options, .notes-area {
+            .item-options {
                 border-left: 1px dashed #cbd5e1; /* Re-enable border for print if needed */
                 margin-left: 0.5rem;
                 padding-left: 0.5rem;
@@ -158,16 +248,19 @@
             .item-options label {
                 margin-right: 0.75rem;
             }
-            textarea {
-                border: 1px dashed #ccc; /* Dashed border for notes in print */
-                background-color: #f9f9f9;
+            /* Removed textarea print styles */
+            .footer-note {
+                margin-top: 2rem;
+                padding-top: 1rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center text-4xl font-bold mb-8 text-indigo-700">예민한 엄마 셀프 체크리스트</h1>
+        <div class="main-title-wrapper">
+            <h1 class="main-title">나는 예민한 엄마일까? 자가 체크리스트</h1>
+        </div>
         <p class="text-center text-lg text-gray-600 mb-10">
             아래 항목들을 읽고 자신에게 해당되는 정도를 체크해보세요. 솔직하게 답변하는 것이 중요합니다.
         </p>
@@ -182,9 +275,6 @@
                     <label><input type="radio" name="q1" value="no"> 아니오</label>
                     <label><input type="radio" name="q1" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">2. 아이의 행동에 과도하게 반응하거나 불안감을 느낀다.</div>
@@ -192,9 +282,6 @@
                     <label><input type="radio" name="q2" value="yes"> 예</label>
                     <label><input type="radio" name="q2" value="no"> 아니오</label>
                     <label><input type="radio" name="q2" value="sometimes"> 가끔 그렇다</label>
-                </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
                 </div>
             </div>
             <div class="checklist-item">
@@ -204,9 +291,6 @@
                     <label><input type="radio" name="q3" value="no"> 아니오</label>
                     <label><input type="radio" name="q3" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">4. 밤에 잠들기 어렵거나 자주 깬다.</div>
@@ -214,9 +298,6 @@
                     <label><input type="radio" name="q4" value="yes"> 예</label>
                     <label><input type="radio" name="q4" value="no"> 아니오</label>
                     <label><input type="radio" name="q4" value="sometimes"> 가끔 그렇다</label>
-                </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
                 </div>
             </div>
             <div class="checklist-item">
@@ -226,9 +307,6 @@
                     <label><input type="radio" name="q5" value="no"> 아니오</label>
                     <label><input type="radio" name="q5" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">6. 과거의 육아 방식이나 실수에 대해 계속 후회한다.</div>
@@ -237,9 +315,6 @@
                     <label><input type="radio" name="q6" value="no"> 아니오</label>
                     <label><input type="radio" name="q6" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">7. 미래의 육아 상황에 대해 지나치게 걱정한다.</div>
@@ -247,9 +322,6 @@
                     <label><input type="radio" name="q7" value="yes"> 예</label>
                     <label><input type="radio" name="q7" value="no"> 아니오</label>
                     <label><input type="radio" name="q7" value="sometimes"> 가끔 그렇다</label>
-                </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
                 </div>
             </div>
         </div>
@@ -264,9 +336,6 @@
                     <label><input type="radio" name="q8" value="no"> 아니오</label>
                     <label><input type="radio" name="q8" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">9. 두통, 소화 불량 등 신체 증상이 자주 나타난다.</div>
@@ -274,9 +343,6 @@
                     <label><input type="radio" name="q9" value="yes"> 예</label>
                     <label><input type="radio" name="q9" value="no"> 아니오</label>
                     <label><input type="radio" name="q9" value="sometimes"> 가끔 그렇다</label>
-                </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
                 </div>
             </div>
             <div class="checklist-item">
@@ -286,9 +352,6 @@
                     <label><input type="radio" name="q10" value="no"> 아니오</label>
                     <label><input type="radio" name="q10" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">11. 운동이나 취미 활동을 할 여유가 없거나 하지 않는다.</div>
@@ -297,9 +360,6 @@
                     <label><input type="radio" name="q11" value="no"> 아니오</label>
                     <label><input type="radio" name="q11" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">12. 외모나 위생 관리에 소홀해지는 편이다.</div>
@@ -307,9 +367,6 @@
                     <label><input type="radio" name="q12" value="yes"> 예</label>
                     <label><input type="radio" name="q12" value="no"> 아니오</label>
                     <label><input type="radio" name="q12" value="sometimes"> 가끔 그렇다</label>
-                </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
                 </div>
             </div>
         </div>
@@ -324,9 +381,6 @@
                     <label><input type="radio" name="q13" value="no"> 아니오</label>
                     <label><input type="radio" name="q13" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">14. 다른 엄마들과 비교하며 스스로 위축되거나 열등감을 느낀다.</div>
@@ -334,9 +388,6 @@
                     <label><input type="radio" name="q14" value="yes"> 예</label>
                     <label><input type="radio" name="q14" value="no"> 아니오</label>
                     <label><input type="radio" name="q14" value="sometimes"> 가끔 그렇다</label>
-                </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
                 </div>
             </div>
             <div class="checklist-item">
@@ -346,9 +397,6 @@
                     <label><input type="radio" name="q15" value="no"> 아니오</label>
                     <label><input type="radio" name="q15" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">16. 배우자나 가족과의 갈등이 잦아진다.</div>
@@ -357,9 +405,6 @@
                     <label><input type="radio" name="q16" value="no"> 아니오</label>
                     <label><input type="radio" name="q16" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">17. 외출이나 모임에 참여하는 것이 부담스럽다.</div>
@@ -367,9 +412,6 @@
                     <label><input type="radio" name="q17" value="yes"> 예</label>
                     <label><input type="radio" name="q17" value="no"> 아니오</label>
                     <label><input type="radio" name="q17" value="sometimes"> 가끔 그렇다</label>
-                </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
                 </div>
             </div>
         </div>
@@ -384,9 +426,6 @@
                     <label><input type="radio" name="q18" value="no"> 아니오</label>
                     <label><input type="radio" name="q18" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">19. 아이의 독립적인 행동을 불안해하거나 통제하려 한다.</div>
@@ -394,9 +433,6 @@
                     <label><input type="radio" name="q19" value="yes"> 예</label>
                     <label><input type="radio" name="q19" value="no"> 아니오</label>
                     <label><input type="radio" name="q19" value="sometimes"> 가끔 그렇다</label>
-                </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
                 </div>
             </div>
             <div class="checklist-item">
@@ -406,9 +442,6 @@
                     <label><input type="radio" name="q20" value="no"> 아니오</label>
                     <label><input type="radio" name="q20" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
             <div class="checklist-item">
                 <div class="item-text">21. 아이의 작은 실패에도 과도하게 걱정하거나 대신 해결해 주려 한다.</div>
@@ -416,9 +449,6 @@
                     <label><input type="radio" name="q21" value="yes"> 예</label>
                     <label><input type="radio" name="q21" value="no"> 아니오</label>
                     <label><input type="radio" name="q21" value="sometimes"> 가끔 그렇다</label>
-                </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
                 </div>
             </div>
             <div class="checklist-item">
@@ -428,9 +458,6 @@
                     <label><input type="radio" name="q22" value="no"> 아니오</label>
                     <label><input type="radio" name="q22" value="sometimes"> 가끔 그렇다</label>
                 </div>
-                <div class="notes-area">
-                    <textarea placeholder="비고 (자세히 적어보세요)"></textarea>
-                </div>
             </div>
         </div>
 
@@ -438,13 +465,15 @@
 
         <!-- 결과 표시를 위한 모달 (초기에는 숨김) -->
         <div id="resultModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 hidden">
-            <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full text-center relative">
-                <h3 class="text-2xl font-bold mb-4 text-indigo-700">체크리스트 결과</h3>
-                <p id="resultText" class="text-gray-700 mb-6 text-lg"></p>
-                <button class="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600 transition-colors" onclick="hideResults()">닫기</button>
-                <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl" onclick="hideResults()">&times;</button>
+            <div class="modal-content">
+                <h3 class="modal-header">체크리스트 결과</h3>
+                <p id="resultText" class="modal-body"></p>
+                <button class="modal-close-button" onclick="hideResults()">닫기</button>
+                <button class="absolute-close-button" onclick="hideResults()">&times;</button>
             </div>
         </div>
+
+        <p class="footer-note">@smartmom.note</p>
     </div>
 
     <script>
@@ -466,13 +495,16 @@
             }
 
             let resultMessage = `총 ${totalQuestions}개 항목 중 '예'라고 답한 항목은 ${yesCount}개, '가끔 그렇다'고 답한 항목은 ${sometimesCount}개 입니다.<br><br>`;
+            const totalScore = yesCount + sometimesCount; // '예'와 '가끔 그렇다'의 합계 점수
 
-            if (yesCount >= 10 || (yesCount + sometimesCount) >= 15) {
-                resultMessage += "현재 육아 스트레스가 높거나 예민한 상태일 수 있습니다. 전문가와 상담하거나 충분한 휴식을 취하는 것을 고려해보세요.";
-            } else if (yesCount >= 5 || (yesCount + sometimesCount) >= 10) {
-                resultMessage += "어느 정도 육아 스트레스나 예민함이 있을 수 있습니다. 스스로를 돌아보고 휴식과 자기 돌봄 시간을 갖는 것이 좋습니다.";
-            } else {
-                resultMessage += "비교적 안정적인 상태입니다. 현재의 긍정적인 육아 방식을 유지하고, 가끔 자신을 돌아보는 시간을 가지세요.";
+            if (totalScore >= 15) { // 15개 이상: 전문가의 도움이 강력히 권장되는 상태
+                resultMessage += "🔴 전문가의 도움이 강력히 권장되는 상태<br><br>현재 매우 높은 수준의 육아 스트레스와 예민함을 경험하고 있을 가능성이 높습니다. 이는 신체적, 정신적 건강에 심각한 영향을 미칠 수 있으며, 일상 기능에도 어려움이 있을 수 있습니다.<br>전문가와 상담하거나 주변의 적극적인 도움을 요청하는 것을 고려해보세요.";
+            } else if (totalScore >= 10) { // 10~14개: 육아 스트레스 또는 예민함이 높은 상태
+                resultMessage += "🟠 육아 스트레스 또는 예민함이 높은 상태<br><br>현재 육아 스트레스나 예민함이 높은 상태일 가능성이 큽니다. 감정적으로 지치고 신체적으로도 피로감을 많이 느낄 수 있으며, 일상생활에 영향을 미칠 정도의 어려움을 겪고 있을 수 있습니다.<br>충분한 휴식을 취하고, 자기 돌봄 시간을 갖는 것이 중요합니다.";
+            } else if (totalScore >= 5) { // 5~9개: 주의와 자기 돌봄이 필요한 상태
+                resultMessage += "🟡 주의와 자기 돌봄이 필요한 상태<br><br>어느 정도 육아 스트레스나 예민함을 경험하고 있을 수 있습니다. 일상생활에서 불편함이나 어려움을 느끼는 순간들이 있을 수 있으며, 이는 자신을 돌아보고 휴식을 취할 필요가 있다는 신호일 수 있습니다.<br>하루 10~30분이라도 자신만을 위한 시간을 확보하고 스트레스 해소법을 찾아보세요.";
+            } else { // 0~4개: 비교적 안정적인 상태
+                resultMessage += "🟢 비교적 안정적인 상태<br><br>현재 육아 스트레스나 예민함이 비교적 낮은 안정적인 상태로 보입니다. 스스로를 잘 돌보고 있으며, 육아에 대한 긍정적인 태도를 유지하고 계신 것으로 판단됩니다.<br>현재의 긍정적인 자기 돌봄 습관을 계속 유지하고, 가끔 자신을 돌아보는 시간을 가지세요.";
             }
 
             document.getElementById('resultText').innerHTML = resultMessage;
