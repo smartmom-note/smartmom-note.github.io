@@ -100,7 +100,7 @@
             flex-shrink: 0;
         }
 
-        /* Print specific styles */
+        /* Print specific styles for A4 optimization */
         @media print {
             body {
                 background-color: #ffffff;
@@ -110,10 +110,43 @@
             .container {
                 box-shadow: none;
                 border: none;
-                margin: 0;
-                padding: 1rem;
+                margin: 0.2cm; /* Further reduced margin for print */
+                padding: 0.2cm; /* Further reduced padding for print */
                 max-width: none;
                 width: 100%;
+                font-size: 0.8em; /* Further slightly reduce base font size for print */
+            }
+            h1 {
+                font-size: 1.6rem; /* Even smaller title for print */
+                margin-bottom: 0.6rem;
+            }
+            p {
+                font-size: 0.8rem; /* Even smaller paragraph text for print */
+            }
+            h3 {
+                font-size: 1.1rem; /* Even smaller day titles for print */
+            }
+            .day-card {
+                margin-bottom: 0.4rem; /* Further reduced margin between cards for print */
+                padding: 0.8rem; /* Further reduced padding within cards for print */
+            }
+            .day-content {
+                gap: 0.8rem; /* Further reduced gap between icon and text for print */
+            }
+            .day-icon {
+                width: 45px; /* Even smaller icon size for print */
+                height: 45px;
+                font-size: 1.6rem; /* Even smaller emoji size for print */
+            }
+            .day-text {
+                font-size: 0.8rem; /* Adjusted day text size for print */
+            }
+            .point {
+                font-size: 0.7rem; /* Adjusted point text size for print */
+            }
+            .check-box {
+                width: 16px; /* Even smaller checkbox for print */
+                height: 16px;
             }
         }
     </style>
@@ -122,8 +155,6 @@
     <div class="container">
         <h1>🧠 아이 감정조절 훈련하는 7가지 루틴표</h1>
         <p class="text-center text-lg mb-6 text-gray-600">전전두엽을 자극하는 뇌과학 기반 감정 훈련</p>
-
-        <!-- "만 3세~7세 유아"부터 "감정은 타고나는 게 아니라 ‘훈련’으로 길러집니다." 텍스트 제거 -->
 
         <div class="mt-8">
             <!-- 루틴 1 -->
@@ -174,7 +205,7 @@
                         <h3>루틴 4. 감정 역할극</h3>
                         <p><strong>활동:</strong> “친구가 장난감을 뺏었을 때 어떻게 했어?”</p>
                         <p>인형이나 상황극으로 감정 상황을 표현해보세요</p>
-                        <p class="point"><strong>👉 포인트:</strong> 감정을 표현하고 대처하는 말 연습</p>
+                        <p class="point"><strong>👉 포인트:</b> 감정을 표현하고 대처하는 말 연습</p>
                     </div>
                     <div class="check-box"></div>
                 </div>
