@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이 감정기복 원인 체크리스트</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top */
+            min-height: 100vh;
+            padding: 2rem 1rem; /* Add padding for mobile */
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            padding: 2.5rem; /* Increased padding */
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .section-title {
+            font-size: 1.6rem; /* Slightly larger title */
+            font-weight: 700;
+            color: #334155; /* Darker text for titles */
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .section-title svg {
+            margin-right: 0.75rem;
+            color: #6366f1; /* Indigo color for icons */
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0; /* Lighter border */
+        }
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        .checklist-item input[type="checkbox"] {
+            margin-right: 1rem;
+            min-width: 1.25rem; /* Ensure checkbox is visible */
+            min-height: 1.25rem;
+            border-radius: 0.375rem; /* Rounded checkbox */
+            border: 2px solid #94a3b8; /* Gray border */
+            accent-color: #6366f1; /* Indigo accent color */
+            cursor: pointer;
+        }
+        .checklist-item label {
+            flex-grow: 1;
+            font-size: 1.05rem; /* Slightly larger text */
+            color: #334155; /* Dark text */
+            line-height: 1.5;
+            cursor: pointer;
+        }
+        .guide-box {
+            background-color: #f8fafc; /* Very light gray */
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .guide-box h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e293b; /* Darker text */
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .guide-box h3 svg {
+            margin-right: 0.5rem;
+            color: #6366f1;
+        }
+        .guide-box p {
+            font-size: 0.95rem;
+            color: #475569; /* Medium gray text */
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        .guide-box p:last-child {
+            margin-bottom: 0;
+        }
+        .note-box {
+            background-color: #ecfdf5; /* Light green for notes */
+            border: 1px solid #a7f3d0; /* Green border */
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .note-box p {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #065f46; /* Dark green text */
+        }
+        /* New style for the light yellow background sections */
+        .section-background {
+            background-color: #fffbeb; /* Very light yellow */
+            border-radius: 1rem; /* Rounded corners for the sections */
+            padding: 1.5rem; /* Add padding inside the section */
+            margin-bottom: 2rem; /* Space between sections */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 flex items-center justify-center">
+            <svg class="w-8 h-8 mr-3 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            아이 감정기복 원인 체크리스트
+        </h1>
+        <p class="text-center text-gray-600 mb-8 leading-relaxed">
+            아래 항목 중 아이에게 해당되는 내용을 골라보세요. <br>
+            <span class="font-medium text-gray-700">기질 쪽 항목에만 해당된다면 '타고난 성향' 가능성이 높고,</span><br>
+            <span class="font-medium text-gray-700">조절력 쪽에 해당된다면 훈련으로 좋아질 수 있습니다.</span>
+        </p>
+
+        <!-- 1. 기질(타고난 성향) 체크 항목 -->
+        <div class="section-background">
+            <h2 class="section-title">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                1. 기질(타고난 성향) 체크 항목
+            </h2>
+            <div class="space-y-4">
+                <div class="checklist-item">
+                    <input type="checkbox" id="trait1" class="rounded-md">
+                    <label for="trait1">① 갑작스러운 소리, 밝은 빛, 옷 태그 등 감각에 민감하다</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="trait2" class="rounded-md">
+                    <label for="trait2">② 새로운 사람, 환경 변화에 쉽게 긴장하거나 낯을 가린다</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="trait3" class="rounded-md">
+                    <label for="trait3">③ 낯선 공간에서 적응에 오래 걸린다</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="trait4" class="rounded-md">
+                    <label for="trait4">④ 예고 없는 변화(예: 갑작스런 외출)에 강하게 저항한다</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="trait5" class="rounded-md">
+                    <label for="trait5">⑤ 똑같은 말·장면에도 강한 감정 반응을 보인다 (예: 동생과 장난감 다툼 시 늘 분노)</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 조절력 미성숙(훈련 가능한 기능) 체크 항목 -->
+        <div class="section-background">
+            <h2 class="section-title">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                2. 조절력 미성숙(훈련 가능한 기능) 체크 항목
+            </h2>
+            <div class="space-y-4">
+                <div class="checklist-item">
+                    <input type="checkbox" id="control1" class="rounded-md">
+                    <label for="control1">① 놀다가 장난감이 안 풀릴 때 금세 짜증·울음으로 반응한다</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="control2" class="rounded-md">
+                    <label for="control2">② ‘기다려’, ‘그만하자’ 등의 말에 반응하지 않고 감정 폭발한다</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="control3" class="rounded-md">
+                    <label for="control3">③ 감정이 올라오면 얼굴·몸 움직임까지 크게 흔들린다</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="control4" class="rounded-md">
+                    <label for="control4">④ 감정을 말로 설명하기보단 ‘소리 지르기’로 반응한다</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="control5" class="rounded-md">
+                    <label for="control5">⑤ 낮잠을 못 자거나 배고플 때 감정기복이 더 심해진다</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 결과 해석 가이드 -->
+        <div class="guide-box">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.3 2.671-1.3 3.436 0L14.953 7.82c.765 1.3-.177 2.9-1.732 2.9H6.779c-1.555 0-2.497-1.6-1.732-2.9L8.257 3.099zM10 12a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
+                결과 해석 가이드
+            </h3>
+            <p>
+                <span class="font-medium text-gray-900">기질 항목만 해당된다면:</span><br>
+                → 아이는 예민하거나 느린 기질일 수 있어요.<br>
+                → 억제보다는 ‘예측 가능한 환경 + 반복된 안전자극’이 중요해요.
+            </p>
+            <p>
+                <span class="font-medium text-gray-900">조절력 항목만 해당된다면:</span><br>
+                → 아직 뇌의 조절력이 미성숙한 상태예요.<br>
+                → 일상 속 감정이름 붙이기, 감정루틴 훈련으로 충분히 좋아질 수 있어요.
+            </p>
+            <p>
+                <span class="font-medium text-gray-900">양쪽 모두 해당된다면:</span><br>
+                → 예민한 기질을 가진 아이가 조절력도 부족한 상황일 수 있어요.<br>
+                → 더 정교한 감정조절 훈련이 필요하며, 부모의 반응 루틴이 결정적입니다.
+            </p>
+        </div>
+
+        <!-- Smart Mom Note -->
+        <div class="note-box">
+            <p>@smartmom.note</p>
+        </div>
+    </div>
+</body>
+</html>
